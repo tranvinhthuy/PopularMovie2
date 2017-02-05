@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">PopularMovie1</string>
+    <string name="app_name">Popular Movies</string>
+    <string name="item_sort">Sort by</string>
+
+    <string name="sort_dlg_tittle">Choose the sort option</string>
+    <string name="sort_popular">Sort by popularity</string>
+    <string name="sort_rating">Sort by rating</string>
+
+    <string name="release_date">Release date:\t</string>
+    <string name="rating">Rating:\t</string>
+    <string name="plot">Plot:\t</string>
 </resources>
