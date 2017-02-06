@@ -51,7 +51,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         String imgPath = IMG_URL_BASE + lstMovies.get(position).getMvPoster();
-        Picasso.with(ctx).load(imgPath).into(holder.imgMovie);
+        Picasso.with(ctx).load(imgPath).placeholder(android.R.drawable.ic_menu_gallery).into(holder.imgMovie);
 
     }
 

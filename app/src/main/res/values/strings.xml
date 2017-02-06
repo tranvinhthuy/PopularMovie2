@@ -9,4 +9,6 @@
     <string name="release_date">Release date:\t</string>
     <string name="rating">Rating:\t</string>
     <string name="plot">Plot:\t</string>
+
+    <string name="no_network_notification">No network available for loading movie info!</string>
 </resources>

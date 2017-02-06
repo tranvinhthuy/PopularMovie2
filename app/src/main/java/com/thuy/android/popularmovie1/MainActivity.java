@@ -1,7 +1,10 @@
 package com.thuy.android.popularmovie1;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -13,13 +16,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.GridItemClickListener{
+public class MainActivity extends AppCompatActivity implements MovieAdapter.GridItemClickListener {
 
     private ProgressBar pgbarLoadMovies;
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pgbarLoadMovies = (ProgressBar)findViewById(R.id.pgbar_load_movie);
+        pgbarLoadMovies = (ProgressBar) findViewById(R.id.pgbar_load_movie);
 
         mvList = (RecyclerView) findViewById(R.id.rv_list_mv);
 
@@ -60,21 +64,21 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
         return true;
     }
 
-    void showSortOptionDialog(){
+    void showSortOptionDialog() {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(getString(R.string.sort_dlg_tittle));
         final String[] sortOptions = {getString(R.string.sort_popular), getString(R.string.sort_rating)};
         final String[] sortOptionsVal = {NetworkUtils.POPULAR, NetworkUtils.TOP_RATED};
 
-        int checkedItem =0;
-        if(currentSortOption==sortOptionsVal[1])
+        int checkedItem = 0;
+        if (currentSortOption == sortOptionsVal[1])
             checkedItem = 1;
 
         dialog.setSingleChoiceItems(sortOptions, checkedItem, new DialogInterface
                 .OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                if(currentSortOption != sortOptionsVal[item]) {
+                if (currentSortOption != sortOptionsVal[item]) {
                     currentSortOption = sortOptionsVal[item];
                     dialog.dismiss();
                     LoadingMoviesTask loadingMoviesTask = new LoadingMoviesTask();
@@ -98,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
 
     @Override
     public void onGridItemClick(int clickItemIndex) {
-        Intent intent = new Intent(thisActivity,DetailActivity.class);
+        Intent intent = new Intent(thisActivity, DetailActivity.class);
         intent.putExtra(Intent.EXTRA_TEXT, lstMovies.get(clickItemIndex).toString());
         startActivity(intent);
     }
@@ -108,7 +112,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pgbarLoadMovies.setVisibility(View.VISIBLE);
+            ConnectivityManager cm =
+                    (ConnectivityManager) thisActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            boolean isConnected = activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting();
+            if (!isConnected) {
+                this.cancel(true);
+                Toast.makeText(thisActivity, getString(R.string.no_network_notification), Toast.LENGTH_SHORT).show();
+            }
+            else
+                pgbarLoadMovies.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -125,6 +140,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            catch (NullPointerException e) {
+                e.printStackTrace();
+            }
             String display = "";
             for (int i = 0; i < lstMovies.size(); i++) {
                 display = display + lstMovies.get(i).toString() + "\n";
@@ -135,12 +153,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if(firstLoad) {
+            if (firstLoad) {
                 mvAdapter = new MovieAdapter(lstMovies, thisActivity);
                 mvList.setAdapter(mvAdapter);
                 firstLoad = false;
-            }
-            else {
+            } else {
                 mvAdapter.notifyDataSetChanged();
             }
             pgbarLoadMovies.setVisibility(View.INVISIBLE);

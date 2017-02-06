@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imgv_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_weight="1"
-            android:id="@+id/txv_title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_view"
+                android:paddingRight="@dimen/padding_view"
+                android:paddingTop="@dimen/padding_view">
 
-    <TextView
-        android:id="@+id/txv_release_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp"
-        android:text="@string/release_date"
-        android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/imgv_poster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/txv_rating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp"
-        android:text="@string/rating"
-        android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/txv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_size_title"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txv_plot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp"
-        android:text="@string/plot"
-        android:textSize="16sp"
-        android:textStyle="italic" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txv_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/padding_view"
+                android:paddingRight="@dimen/padding_view"
+                android:paddingTop="@dimen/padding_view"
+                android:text="@string/release_date"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/txv_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/padding_view"
+                android:paddingRight="@dimen/padding_view"
+                android:paddingTop="@dimen/padding_view"
+                android:text="@string/rating"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/txv_plot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:padding="@dimen/padding_view"
+                android:text="@string/plot"
+                android:textSize="@dimen/text_size_normal"
+                android:textStyle="italic" />
 
 
-</LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>
