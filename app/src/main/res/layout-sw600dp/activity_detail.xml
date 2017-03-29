@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/imgv_poster"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="250dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
@@ -38,6 +38,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="32dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/text_size_title"
@@ -52,47 +53,46 @@
             android:id="@+id/txv_release_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@string/release_date"
             android:textSize="@dimen/text_size_normal"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="@+id/txv_title"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txv_title" />
 
         <TextView
             android:id="@+id/txv_rating"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="182dp"
+            android:layout_height="18dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@string/rating"
             android:textSize="@dimen/text_size_normal"
-            app:layout_constraintLeft_toLeftOf="@+id/txv_release_date"
+            app:layout_constraintLeft_toRightOf="@+id/txv_release_date"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txv_release_date" />
+            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/txv_title" />
 
         <TextView
             android:id="@+id/txv_plot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:gravity="left|center_vertical"
             android:text="@string/plot"
             android:textSize="@dimen/text_size_normal"
             android:textStyle="italic"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/imgv_poster"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgv_poster" />
+            app:layout_constraintTop_toBottomOf="@id/txv_release_date"
+            app:layout_constraintHorizontal_bias="0.0" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
@@ -107,11 +107,12 @@
             android:id="@+id/frameLayout"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:layout_marginTop="8dp"
             android:background="@color/colorPrimaryDark"
-            app:layout_constraintLeft_toLeftOf="@+id/txv_plot"
-            app:layout_constraintRight_toRightOf="@+id/txv_plot"
-            app:layout_constraintTop_toBottomOf="@+id/txv_plot">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/imgv_poster"
+            app:layout_constraintHorizontal_bias="0.0">
 
         </FrameLayout>
 

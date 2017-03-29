@@ -7,4 +7,11 @@
         android:title="@string/item_sort"
         app:showAsAction="collapseActionView" />
 
+    <item
+        android:id="@+id/menu_show_fave"
+        android:checkable="true"
+        android:orderInCategory="2"
+        app:showAsAction="collapseActionView"
+        android:title="@string/item_fave"/>
+
 </menu>

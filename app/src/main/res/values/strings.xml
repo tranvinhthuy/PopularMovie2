@@ -11,4 +11,17 @@
     <string name="plot">Plot:\t</string>
 
     <string name="no_network_notification">No network available for loading movie info!</string>
+
+    <string name="trailers">TRAILERS</string>
+    
+    <string name="reviewer_label">by </string>
+
+    <string name="reviews">REVIEWS</string>
+
+    <string name="notify_save_fav">Movie is saved to favorite</string>
+
+    <string name="notify_remove_fave">Movie is removed from favorite</string>
+
+    <string name="item_fave">Show favorite movies only</string>
+
 </resources>

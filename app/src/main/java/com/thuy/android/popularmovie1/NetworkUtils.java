@@ -28,23 +28,30 @@ public class NetworkUtils {
 
     final static String PARAM_PAGE = "page";
 
+    public final static String OPTION_TRAILERS = "/videos";
+
+    public final static String OPTION_REVIEWS = "/reviews";
+
+    final static String BASE_YOUTUBE_URL = "http://www.youtube.com/watch?v=";
+
     static int pageCounter = 1;
 
     static String currentOptions = "";
 
-    public static URL buildURL(String option) {
+    public static URL buildReqListMvURL(String option) {
 
-        if(currentOptions != option) {
-            currentOptions = option;
-            pageCounter = 1;
-        }
-        else
-            pageCounter++;
+//        if (currentOptions != option) {
+//            currentOptions = option;
+//            pageCounter = 1;
+//        } else
+//            pageCounter++;
 
-        Uri uri = Uri.parse(BASE_URL+option).buildUpon()
-                        .appendQueryParameter(PARAM_KEY, API_KEY)
-                        .appendQueryParameter(PARAM_PAGE, Integer.toString(pageCounter))
-                        .build();
+        pageCounter = 1;
+
+        Uri uri = Uri.parse(BASE_URL + option).buildUpon()
+                .appendQueryParameter(PARAM_KEY, API_KEY)
+                .appendQueryParameter(PARAM_PAGE, Integer.toString(pageCounter))
+                .build();
 
         URL url = null;
         try {
@@ -54,6 +61,22 @@ public class NetworkUtils {
         }
         return url;
     }
+
+    public static URL buildReqMvDetailsURL(String movieID, String detail) {
+
+        Uri uri = Uri.parse(BASE_URL + movieID + detail).buildUpon()
+                .appendQueryParameter(PARAM_KEY, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(uri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -66,15 +89,17 @@ public class NetworkUtils {
 
             boolean hasInput = scanner.hasNext();
 
-            if(hasInput)
+            if (hasInput)
                 return scanner.next();
             else
                 return null;
-        }
-        finally {
+        } finally {
             connection.disconnect();
         }
     }
 
+    public static String getYouTubeURL(String videoCode) {
+        return BASE_YOUTUBE_URL + videoCode;
+    }
 
 }

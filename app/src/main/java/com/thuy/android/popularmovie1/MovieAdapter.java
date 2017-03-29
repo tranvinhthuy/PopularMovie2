@@ -23,7 +23,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     final private GridItemClickListener itemClickListener;
 
-    final String IMG_URL_BASE = "http://image.tmdb.org/t/p/w780/";
+    final String IMG_URL_BASE = "http://image.tmdb.org/t/p/w600/";
 
     Context ctx;
 
@@ -50,9 +50,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
+//        if(position >= lstMovies.size())
+//            return;
         String imgPath = IMG_URL_BASE + lstMovies.get(position).getMvPoster();
         Picasso.with(ctx).load(imgPath).placeholder(android.R.drawable.ic_menu_gallery).into(holder.imgMovie);
-
     }
 
     @Override

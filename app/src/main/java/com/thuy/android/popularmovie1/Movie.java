@@ -6,11 +6,16 @@ package com.thuy.android.popularmovie1;
 
 public class Movie {
 
+    private String mvID;
     private String mvTitle;
     private String mvPoster;
     private String mvPlot;
     private String mvRating;
     private String mvReleaseDate;
+    private boolean isFavorited = false;
+
+    public static final String KEY_IS_FAVED = "isFaved";
+    public static final String KEY_MV_STRING= "mvString";
 
     public void setMvTitle(String mvTitle) {
         this.mvTitle = mvTitle;
@@ -34,18 +39,21 @@ public class Movie {
 
     @Override
     public String toString() {
-        return this.getMvTitle() + "\n" + this.getMvPoster() + "\n" + this.getMvPlot() + "\n" + this.getMvRating() + "\n" + this.getMvReleaseDate();
+        return this.getMvID() + "\n" + this.getMvTitle() + "\n" + this.getMvPoster()
+                + "\n" + this.getMvPlot() + "\n" + this.getMvRating() + "\n" + this.getMvReleaseDate();
     }
 
-    public Movie() {}
+    public Movie() {
+    }
 
     public Movie(String fromString) {
         String[] arrayVals = fromString.split("\n");
-        mvTitle = arrayVals[0];
-        mvPoster = arrayVals[1];
-        mvPlot = arrayVals[2];
-        mvRating = arrayVals[3];
-        mvReleaseDate = arrayVals[4];
+        mvID = arrayVals[0];
+        mvTitle = arrayVals[1];
+        mvPoster = arrayVals[2];
+        mvPlot = arrayVals[3];
+        mvRating = arrayVals[4];
+        mvReleaseDate = arrayVals[5];
     }
 
     public String getMvTitle() {
@@ -66,5 +74,13 @@ public class Movie {
 
     public String getMvReleaseDate() {
         return mvReleaseDate;
+    }
+
+    public String getMvID() {
+        return mvID;
+    }
+
+    public void setMvID(String mvID) {
+        this.mvID = mvID;
     }
 }
