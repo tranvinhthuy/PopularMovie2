@@ -79,12 +79,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
         String sortOption = getSortOption();
         if(sortOption != null) {
             currentSortOption = sortOption;
-            Toast.makeText(thisActivity, sortOption, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(thisActivity, sortOption, Toast.LENGTH_SHORT).show();
         }
         else {
             setSortOption(NetworkUtils.POPULAR);
             currentSortOption = NetworkUtils.POPULAR;
-            Toast.makeText(thisActivity, "Sort option = null", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(thisActivity, "Sort option = null", Toast.LENGTH_SHORT).show();
         }
         LoadingMoviesTask loadingMoviesTask = new LoadingMoviesTask();
         loadingMoviesTask.execute(currentSortOption);
