@@ -16,13 +16,15 @@ import java.util.Scanner;
 
 public class NetworkUtils {
 
-    final static String API_KEY = "";
+    final static String API_KEY = "e71d68328e14e1b2a5f493dfbf5e2f23";
 
     final static String BASE_URL = "https://api.themoviedb.org/3/movie/";
 
     final public static String TOP_RATED = "top_rated";
 
     final public static String POPULAR = "popular";
+
+    final public static String PREF_SORT_OPTION = "sortOption";
 
     final static String PARAM_KEY = "api_key";
 

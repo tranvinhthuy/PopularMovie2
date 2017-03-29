@@ -3,6 +3,7 @@ package com.thuy.android.popularmovie1;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
 
     ArrayList<Movie> lstMovies = new ArrayList<>();
 
-    private String currentSortOption = NetworkUtils.POPULAR;
+    private String currentSortOption;
 
     boolean firstLoad = true;
 
@@ -75,6 +76,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
 
         thisActivity = this;
 
+        String sortOption = getSortOption();
+        if(sortOption != null) {
+            currentSortOption = sortOption;
+            Toast.makeText(thisActivity, sortOption, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            setSortOption(NetworkUtils.POPULAR);
+            currentSortOption = NetworkUtils.POPULAR;
+            Toast.makeText(thisActivity, "Sort option = null", Toast.LENGTH_SHORT).show();
+        }
         LoadingMoviesTask loadingMoviesTask = new LoadingMoviesTask();
         loadingMoviesTask.execute(currentSortOption);
     }
@@ -104,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
                 if (currentSortOption != sortOptionsVal[item]) {
                     currentSortOption = sortOptionsVal[item];
                     dialog.dismiss();
+                    setSortOption(currentSortOption);
                     LoadingMoviesTask loadingMoviesTask = new LoadingMoviesTask();
                     loadingMoviesTask.execute(currentSortOption);
                 }
@@ -276,4 +288,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Grid
         }
         super.onResume();
     }
+
+    public String getSortOption() {
+        SharedPreferences preference = getPreferences(Context.MODE_PRIVATE);
+        String sortOptions = preference.getString(NetworkUtils.PREF_SORT_OPTION, null);
+        return sortOptions;
+    }
+
+    public void setSortOption(String option) {
+        SharedPreferences preference = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preference.edit();
+        editor.putString(NetworkUtils.PREF_SORT_OPTION, option);
+        editor.commit();
+    }
+
 }
